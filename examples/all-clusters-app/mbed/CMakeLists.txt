@@ -66,6 +66,8 @@ target_sources(${APP_TARGET} PRIVATE
                ${CHIP_ROOT}/src/app/server/Server.cpp
                ${CHIP_ROOT}/src/app/server/CommissioningWindowManager.cpp
 
+               ${CHIP_ROOT}/examples/all-clusters-app/all-clusters-common/src/bridged-actions-stub.cpp
+
                ${APP_UTIL}/DataModelHandler.cpp
                ${APP_UTIL}/af-event.cpp
                ${APP_UTIL}/af-main-common.cpp
@@ -84,6 +86,7 @@ target_sources(${APP_TARGET} PRIVATE
                ${APP_UTIL}/util.cpp
                ${APP_UTIL}/error-mapping.cpp
 
+               ${APP_CLUSTERS}/application-basic-server/application-basic-server.cpp
                ${APP_CLUSTERS}/basic/basic.cpp
                ${APP_CLUSTERS}/bindings/bindings.cpp
                ${APP_CLUSTERS}/on-off-server/on-off-server.cpp
