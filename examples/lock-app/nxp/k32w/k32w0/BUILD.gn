@@ -39,6 +39,7 @@ k32w0_sdk("sdk") {
     "main/include",
     "main",
     "include",
+    "geo",
     "${k32w0_platform_dir}/app/support",
     "${k32w0_platform_dir}/util/include",
   ]
@@ -64,6 +65,10 @@ k32w0_executable("lock_app") {
     "main/include/AppTask.h",
     "main/include/BoltLockManager.h",
     "main/main.cpp",
+    "geo/i2c_interface.c",
+    "geo/i2c_interface.h",
+    "geo/temperature_sensor.c",
+    "geo/temperature_sensor.h",
   ]
 
   deps = [

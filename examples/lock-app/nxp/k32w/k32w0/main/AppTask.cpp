@@ -33,6 +33,11 @@
 #include <app-common/zap-generated/cluster-id.h>
 #include <app/util/attribute-storage.h>
 
+#include "fsl_common.h"
+#include "fsl_debug_console.h"
+#include "i2c_interface.h"
+#include "temperature_sensor.h"
+
 #include "Keyboard.h"
 #include "LED.h"
 #include "LEDWidget.h"
@@ -110,6 +115,32 @@ CHIP_ERROR AppTask::Init()
 
     /* intialize the Keyboard and button press calback */
     KBD_Init(KBD_Callback);
+
+    K32W_LOG("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+#if 1
+    status_t i2c_status = i2c_init();
+
+    if (i2c_status != kStatus_Success) {
+        K32W_LOG("I2C master: error during init, %d", (int)i2c_status);
+    }
+    else
+    {
+      int32_t millicelcius;
+      int32_t millihumidity;
+
+      K32W_LOG("init success");
+
+      i2c_status = temperature_sensor_read(&millicelcius, &millihumidity);
+
+      if (i2c_status != kStatus_Success) {
+          K32W_LOG("I2C master: error reading sensor: %d", (int)i2c_status);
+      }
+      else
+      {
+        K32W_LOG("Temperature: %d millicelcius\r\nRelative humidity %d per thou\r\n", (int)millicelcius, (int)millihumidity);
+      }
+    }
+#endif
 
     // Create FreeRTOS sw timer for Function Selection.
     sFunctionTimer = xTimerCreate("FnTmr",          // Just a text name, not used by the RTOS kernel
